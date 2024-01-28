@@ -1,4 +1,4 @@
-##Hyprlnad Gruvbox rice
+## Hyprlnad Gruvbox rice
 
 Basics config files to hyprland and waybar.
 
