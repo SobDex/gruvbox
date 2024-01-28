@@ -1,0 +1,181 @@
+{
+    "name": "topbar",
+    "layer": "top", // Waybar at top layer
+    "bar-id": "bar-1",
+    "ipc": true,
+    "position": "top", // Waybar position (top|bottom|left|right)
+    "mod": "dock",
+    "height": 27, // Waybar height (to be removed for auto height)
+    "width": 1900, // Waybar width
+    "margin": 3,
+    //"spacing": 3, // Gaps between modules (4px)
+    // Choose the order of the modules
+    
+    "modules-left": [
+        "pulseaudio",        
+        "group/playerctl",
+	],
+    "group/playerctl": {
+        "orientation": "horizontal",
+        "modules": [
+        "custom/play", 
+		"custom/prev", 
+		"custom/next", 
+		//"custom/killcmus",
+        "mpris",
+        "custom/cmus"
+        ]
+    },
+
+    "modules-center": [
+        "hyprland/workspaces"
+    ],
+
+    "modules-right": [
+        "group/system",    
+        "custom/temp",        
+        "custom/wallpaper",
+        "custom/picker",
+        "custom/sys",
+        "custom/updates",
+        "custom/power",
+        "custom/config", 
+        "clock",
+        "tray"],
+    
+    "group/system": {
+        "orientation": "horizontal",
+        "modules": [
+        "cpu", 
+        "memory"
+        ]
+    },
+    
+    "hyprland/workspaces" : {
+        "on-click": "activate",
+        "active-only": false,
+        "all-outputs": true,
+        "format": "{}",
+        "format-icons": {
+			"urgent": "",
+			"active": "",
+			"default": ""
+        },
+        "persistent-workspaces": {
+             "*": 7
+        }       
+    },
+
+
+    "hyprland/window": {
+		"format": "{}",
+		"max-length": 50,
+		"separate-outputs": true	
+    },
+    "tray": {
+        // "icon-size": 21,
+        "spacing": 10
+    },
+    "custom/sys": {
+        "format": "",
+        "interval": 7200,
+        "on-click": "xfce4-terminal ncdu",
+        "on-click-right": "xfce4-terminal -e btop &"
+    },
+    "cpu": {
+        "format": "  {usage}% ",
+        "tooltip": false,
+        "on-click": "xfce4-terminal -e btop"
+    },
+    "memory": {
+        "format": "  {}% "
+    },
+    "clock": {
+        // "timezone": "America/New_York",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": "{:%a %d/%m/%Y}"             
+    },
+    "custom/temp": {
+        "format": "{}",           //"<span color=\"#0ff\"></span> {}",
+        "interval": 10,
+        "exec": "~/.config/waybar/scripts/tempinfo.sh",    
+    },
+   
+    "custom/updates": {
+        "format": "{}", //
+        "interval": 7200,
+        "exec": "~/.config/waybar/scripts/checkupdates.sh",
+        "on-click": "xfce4-terminal",
+        "on-click-right": "firefox --new-window https://docs.fedoraproject.org/pt_BR/quick-docs/dnf/ &"
+    },
+    "custom/wallpaper": {
+        "format": "",
+        "interval": 7200,
+        "on-click": "azote",
+    },
+    "custom/power": {
+        "format": " ",
+        "interval": 7200,
+        "on-click": "wlogout"
+    },
+    "mpris": {
+        "format": "{artist}: {title}",
+        "max-length": 45,
+        "format-paused": "{artist}: <i>{title}</i>",
+	"player-icons": {
+		"default": "▶",
+		"mpv": "🎵"
+        },
+        "status-icons": {
+            "paused": "⏸"
+	},
+	"ignored-players": ["firefox", "cmus"]
+    },
+    "custom/cmus": {
+        "format": "♪ {}",
+        "max-length": 45,
+        "interval": 10,
+        "exec": "cmus-remote -Q | grep '^file' | cut -c 23-", // artist - title
+        "exec-if": "pgrep cmus",
+        "on-click": "cmus-remote -u",
+        "escape": true                                       //handle markup entities
+    },
+    "custom/play": {
+		"format": "  ",
+		"on-click": "playerctl play-pause"
+    },
+        "custom/prev": {
+		"format": "  ",
+		"on-click": "playerctl previous"
+    },
+    "custom/next": {
+		"format": "  ",
+		"on-click": "playerctl next"
+    },
+    "custom/config": {
+        "format": "",
+        "on-click": "alacritty -e nvim ~/.config/hypr/hyprland.conf",
+        "on-click-right": "alacritty -e nvim ~/.config/waybar/config"
+    },
+    "pulseaudio": {
+        "format": "{volume}% {icon} {format_source}",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": " {format_source}",
+        "format-source": "{volume}% ",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    },
+},
+
+}
+
