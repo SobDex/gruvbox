@@ -1,9 +1,3 @@
-## Hyprlnad Gruvbox rice
+## Waybar gruvbox colorscheme
 
-Basics config files to hyprland and waybar.
-
-gtk-theme: Gruvbox-Dark-BL
-
-icons: Obsidian-Amber
-
-cursor: Adwaita
+Basics config files to waybar.
